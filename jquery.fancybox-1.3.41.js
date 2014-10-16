@@ -1,15 +1,16 @@
 /*
- * FancyBox - jQuery Plugin
+ * FancyBox-M is a modified version of FancyBox 1.3.4
+ * Version: 1.3.41 (16.10.2014)
+ * Modified by Radius17 https://github.com/Radius17/Fancybox-M
+ * This modified version is licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ * =====================================================
+ * ORIGINAL FANCYBOX is a jQuery Plugin
  * Simple and fancy lightbox alternative
- *
  * Examples and documentation at: http://fancybox.net
- *
  * Copyright (c) 2008 - 2010 Janis Skarnelis
- * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. Their support is greatly appreciated.
- *
- * modified by Radius17
- * Version: 1.3.41 (08.10.2014)
- *
+ * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. 
+ * Their support is greatly appreciated.
  * Requires: jQuery v1.3+
  *
  * Dual licensed under the MIT and GPL licenses:
