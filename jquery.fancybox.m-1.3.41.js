@@ -7,7 +7,9 @@
  * Copyright (c) 2008 - 2010 Janis Skarnelis
  * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. Their support is greatly appreciated.
  *
- * Version: 1.3.4 (11/11/2010)
+ * modified by Radius17
+ * Version: 1.3.41 (08.10.2014)
+ *
  * Requires: jQuery v1.3+
  *
  * Dual licensed under the MIT and GPL licenses:
@@ -29,7 +31,7 @@
 		isIE6 = $.browser.msie && $.browser.version < 7 && !window.XMLHttpRequest,
 
 		/*
-		 * Private methods 
+		 * Private methods
 		 */
 
 		_abort = function() {
@@ -63,8 +65,8 @@
 
 		_start = function() {
 			var obj = selectedArray[ selectedIndex ],
-				href, 
-				type, 
+				href,
+				type,
 				title,
 				str,
 				emb,
@@ -146,7 +148,7 @@
 					selectedOpts.width = 'auto';
 					selectedOpts.height = 'auto';
 				} else {
-					selectedOpts.autoDimensions = false;	
+					selectedOpts.autoDimensions = false;
 				}
 			}
 
@@ -164,7 +166,7 @@
 			tmp.css('padding', (selectedOpts.padding + selectedOpts.margin));
 
 			$('.fancybox-inline-tmp').unbind('fancybox-cancel').bind('fancybox-change', function() {
-				$(this).replaceWith(content.children());				
+				$(this).replaceWith(content.children());
 			});
 
 			switch (type) {
@@ -285,14 +287,14 @@
 				w = parseInt( ($(window).width() - (selectedOpts.margin * 2)) * parseFloat(w) / 100, 10) + 'px';
 
 			} else {
-				w = w == 'auto' ? 'auto' : w + 'px';	
+				w = w == 'auto' ? 'auto' : w + 'px';
 			}
 
 			if (h.toString().indexOf('%') > -1) {
 				h = parseInt( ($(window).height() - (selectedOpts.margin * 2)) * parseFloat(h) / 100, 10) + 'px';
 
 			} else {
-				h = h == 'auto' ? 'auto' : h + 'px';	
+				h = h == 'auto' ? 'auto' : h + 'px';
 			}
 
 			tmp.wrapInner('<div style="width:' + w + ';height:' + h + ';overflow: ' + (selectedOpts.scrolling == 'auto' ? 'auto' : (selectedOpts.scrolling == 'yes' ? 'scroll' : 'hidden')) + ';position:relative;"></div>');
@@ -348,7 +350,8 @@
 					'background-color' : currentOpts.overlayColor,
 					'opacity' : currentOpts.overlayOpacity,
 					'cursor' : currentOpts.hideOnOverlayClick ? 'pointer' : 'auto',
-					'height' : $(document).height()
+					'height' : $(document).height(),
+					'width' : $(document).width()
 				});
 
 				if (!overlay.is(':visible')) {
@@ -445,8 +448,8 @@
 				return;
 			}
 
-			if (currentOpts.titlePosition == 'inside' && titleHeight > 0) {	
-				title.show();	
+			if (currentOpts.titlePosition == 'inside' && titleHeight > 0) {
+				title.show();
 			}
 
 			content
@@ -560,7 +563,7 @@
 				});
 			}
 
-			if (!currentOpts.showNavArrows) { 
+			if (!currentOpts.showNavArrows) {
 				nav_left.hide();
 				nav_right.hide();
 				return;
@@ -596,7 +599,7 @@
 			}
 
 			_set_navigation();
-	
+
 			if (currentOpts.hideOnContentClick)	{
 				content.bind('click', $.fancybox.close);
 			}
@@ -627,7 +630,7 @@
 		},
 
 		_preload_images = function() {
-			var href, 
+			var href,
 				objNext;
 
 			if ((currentArray.length -1) > currentIndex) {
@@ -671,12 +674,39 @@
 		},
 
 		_get_viewport = function() {
-			return [
-				$(window).width() - (currentOpts.margin * 2),
-				$(window).height() - (currentOpts.margin * 2),
-				$(document).scrollLeft() + currentOpts.margin,
-				$(document).scrollTop() + currentOpts.margin
-			];
+			var ua = navigator.userAgent;
+			var device = {
+				iphone: ua.match(/(iPhone|iPod|iPad)/),
+				android: ua.match(/Android/),
+				blackberry: ua.match(/BlackBerry/)
+			};
+			if(device.iphone || device.android || device.blackberry) {
+				var viewportwidth;
+				var viewportheight;
+				if (typeof window.innerWidth != 'undefined') {
+					viewportwidth = window.innerWidth - currentOpts.margin;
+					viewportheight = window.innerHeight - currentOpts.margin;
+				} else if(typeof document.documentElement != 'undefined' && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) {
+					viewportwidth = document.documentElement.clientWidth - currentOpts.margin;
+					viewportheight = document.documentElement.clientHeight - currentOpts.margin;
+				} else {
+					viewportwidth = document.getElementsByTagName('body')[0].clientWidth - currentOpts.margin;
+					viewportheight = document.getElementsByTagName('body')[0].clientHeight - currentOpts.margin;
+				}
+				return [
+					viewportwidth - currentOpts.margin,
+					viewportheight - currentOpts.margin,
+					$(document).scrollLeft() + currentOpts.margin,
+					$(document).scrollTop() + currentOpts.margin
+				];
+			} else {
+				return [
+					$(window).width() - (currentOpts.margin * 2),
+					$(window).height() - (currentOpts.margin * 2),
+					$(document).scrollLeft() + currentOpts.margin,
+					$(document).scrollTop() + currentOpts.margin
+				];
+			}
 		},
 
 		_get_zoom_to = function () {
@@ -781,7 +811,7 @@
 		};
 
 	/*
-	 * Public methods 
+	 * Public methods
 	 */
 
 	$.fn.fancybox = function(options) {
@@ -1014,14 +1044,14 @@
 		var view, align;
 
 		if (busy) {
-			return;	
+			return;
 		}
 
 		align = arguments[0] === true ? 1 : 0;
 		view = _get_viewport();
 
 		if (!align && (wrap.width() > view[0] || wrap.height() > view[1])) {
-			return;	
+			return;
 		}
 
 		wrap
@@ -1117,7 +1147,7 @@
 
 		overlayShow : true,
 		overlayOpacity : 0.7,
-		overlayColor : '#777',
+		overlayColor : '#BBB',
 
 		titleShow : true,
 		titlePosition : 'float', // 'float', 'outside', 'inside' or 'over'
