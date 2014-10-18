@@ -1,6 +1,6 @@
 ##Fancybox-M
 ####Modified version of fancybox 1.3.4
-This is an unofficial version and is unsupported by Fancybox's author, however it works as is. 
+This is an unofficial version and is unsupported by Fancybox's author, however it works AS IS. 
 
 You may use it ONLY at your own risk ;)
 
