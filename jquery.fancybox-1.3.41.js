@@ -9,7 +9,7 @@
  * Simple and fancy lightbox alternative
  * Examples and documentation at: http://fancybox.net
  * Copyright (c) 2008 - 2010 Janis Skarnelis
- * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. 
+ * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely.
  * Their support is greatly appreciated.
  * Requires: jQuery v1.3+
  *
@@ -1080,14 +1080,26 @@
 			.append('<div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div>')
 			.appendTo( wrap );
 
+		nav_left = $('<a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a>');
+		nav_right = $('<a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>');
+
 		outer.append(
 			content = $('<div id="fancybox-content"></div>'),
 			close = $('<a id="fancybox-close"></a>'),
 			title = $('<div id="fancybox-title"></div>'),
-
-			nav_left = $('<a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a>'),
-			nav_right = $('<a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>')
 		);
+
+//		if(Modernizr.touch){		if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+			content.touchwipe({
+			     wipeLeft: function() { $.fancybox.next(); },
+			     wipeRight: function() { $.fancybox.prev() },
+			     min_move_x: 20,
+			     min_move_y: 20,
+			     preventDefaultEvents: true
+			});
+		} else {
+			outer.append(nav_left, nav_right);
+		}
 
 		close.click($.fancybox.close);
 		loading.click($.fancybox.cancel);
