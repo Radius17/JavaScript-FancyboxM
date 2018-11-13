@@ -1086,7 +1086,7 @@
 		outer.append(
 			content = $('<div id="fancybox-content"></div>'),
 			close = $('<a id="fancybox-close"></a>'),
-			title = $('<div id="fancybox-title"></div>'),
+			title = $('<div id="fancybox-title"></div>')
 		);
 
 //		if(Modernizr.touch){		if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
