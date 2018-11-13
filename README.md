@@ -1,8 +1,8 @@
-##Fancybox-M
-####Modified version of fancybox 1.3.4
-This is an unofficial version and is unsupported by Fancybox's author, however it works AS IS. 
+####Fancybox-M
 
-You may use it ONLY at your own risk ;)
+####Modified version of fancybox 1.3.4
+
+This is an unofficial version and is unsupported by Fancybox's author, however it works AS IS. You may use it ONLY at your own risk ;)
 
 This modified version is licensed under MIT license.
 #####Original version is on http://fancybox.net/ and is licensed under both MIT and GPL licenses.
