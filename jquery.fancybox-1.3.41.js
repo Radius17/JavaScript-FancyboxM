@@ -838,14 +838,17 @@
 				selectedArray = [];
 				selectedIndex = 0;
 
-				var rel = $(this).attr('rel') || '';
-
-				if (!rel || rel == '' || rel === 'nofollow') {
-					selectedArray.push(this);
-
+				var rel_name = options.rel || $.fn.fancybox.defaults.rel;
+				if (!rel_name || rel_name == '') {
+					// Ooops !!!
 				} else {
-					selectedArray = $("a[rel=" + rel + "], area[rel=" + rel + "]");
-					selectedIndex = selectedArray.index( this );
+					var rel = $(this).attr(rel_name) || '';
+					if (!rel || rel == '' || rel === 'nofollow') {
+						selectedArray.push(this);
+					} else {
+						selectedArray = $("a["+rel_name+"=" + rel + "], area["+rel_name+"=" + rel + "]");
+						selectedIndex = selectedArray.index( this );
+					}
 				}
 
 				_start();
@@ -1148,6 +1151,7 @@
 
 		width : 560,
 		height : 340,
+		rel : 'rel',
 
 		autoScale : true,
 		autoDimensions : true,
