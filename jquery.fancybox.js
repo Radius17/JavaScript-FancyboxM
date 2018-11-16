@@ -1,5 +1,7 @@
 /*
  * FancyBox-M is a modified version of FancyBox 1.3.4
+ * Touch events integrated from Bootstrap Carousel Swipe v1.1
+ * =====================================================
  * Version: 1.3.42 (16.11.2018)
  * Modified by Radius17 https://github.com/Radius17/Fancybox-M
  * This modified version is licensed under MIT license.
@@ -16,6 +18,13 @@
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
+ * =====================================================
+ * Bootstrap Carousel Swipe v1.1
+ *
+ * jQuery plugin to enable swipe gestures on Bootstrap 3 carousels.
+ * Examples and documentation: https://github.com/maaaaark/bcSwipe
+ *
+ * Licensed under the MIT license.
  */
 
 ;(function($) {
