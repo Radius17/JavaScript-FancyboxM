@@ -178,36 +178,40 @@
 #fancybox-left-ico, #fancybox-right-ico {
 	position: absolute;
 	top: 50%;
-	left: -9999px;
-	width: 30px;
-	height: 30px;
+/*	left: -9999px; */
+	width: 19px;
+	height: 32px;
 	margin-top: -15px;
 	cursor: pointer;
 	z-index: 41102;
 	display: block;
+	opacity:1;
+	background-image: url('images/fancybox.png');
 }
 
 #fancybox-left-ico {
-	background-image: url('images/fancybox.png');
-	background-position: -40px -30px;
+	left: 15px;
+	background-position: -40px -220px;
 }
 
 #fancybox-right-ico {
-	background-image: url('images/fancybox.png');
-	background-position: -40px -60px;
+	right: 15px;
+	background-position: -40px -156px;
 }
 
 #fancybox-left:hover, #fancybox-right:hover {
 	visibility: visible; /* IE6 */
 }
-
-#fancybox-left:hover span {
-	left: 10px;
+#fancybox-left:hover #fancybox-left-ico{
+	background-position: -40px -252px;
+} 
+#fancybox-right:hover #fancybox-right-ico{
+	background-position: -40px -188px;
 }
 
+#fancybox-left:hover span,
 #fancybox-right:hover span {
-	left: auto;
-	right: 10px;
+	opacity:1;
 }
 
 #fancybox-title {
