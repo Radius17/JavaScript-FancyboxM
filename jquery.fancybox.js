@@ -1,6 +1,6 @@
 /*
  * FancyBox-M is a modified version of FancyBox 1.3.4
- * Version: 1.3.41 (16.10.2014)
+ * Version: 1.3.42 (16.11.2018)
  * Modified by Radius17 https://github.com/Radius17/Fancybox-M
  * This modified version is licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
@@ -19,7 +19,7 @@
  */
 
 ;(function($) {
-	var tmp, loading, overlay, wrap, outer, content, close, title, nav_left, nav_right,
+	var tmp, loading, overlay, wrap, outer, content, close, title, nav_left, nav_right, start, stillMoving, 
 
 		selectedIndex = 0, selectedOpts = {}, selectedArray = [], currentIndex = 0, currentOpts = {}, currentArray = [],
 
@@ -35,6 +35,32 @@
 		/*
 		 * Private methods
 		 */
+		_cancelTouch = function () {
+			this.removeEventListener('touchmove', _onTouchMove);
+			start = null;
+			stillMoving = false;
+		},
+		_onTouchMove = function (e) {
+			if (stillMoving) {
+				var x = e.touches[0].pageX;
+				var difference = start - x;
+				if (Math.abs(difference) >= selectedOpts.touchThreshold) {
+					_cancelTouch();
+					if (difference > 0) {
+						$.fancybox.next();
+					} else {
+						$.fancybox.prev();
+					}
+				}
+			}
+		},
+		_onTouchStart = function(e) {
+			if (e.touches.length == 1) {
+				start = e.touches[0].pageX;
+				stillMoving = true;
+				this.addEventListener('touchmove', _onTouchMove, false);
+			}
+		},
 
 		_abort = function() {
 			loading.hide();
@@ -468,13 +494,8 @@
 
 		_format_title = function(title) {
 			if (title && title.length) {
-				if (currentOpts.titlePosition == 'float') {
-					return '<table id="fancybox-title-float-wrap" cellpadding="0" cellspacing="0"><tr><td id="fancybox-title-float-left"></td><td id="fancybox-title-float-main">' + title + '</td><td id="fancybox-title-float-right"></td></tr></table>';
-				}
-
 				return '<div id="fancybox-title-' + currentOpts.titlePosition + '">' + title + '</div>';
 			}
-
 			return false;
 		},
 
@@ -1080,7 +1101,6 @@
 		);
 
 		outer = $('<div id="fancybox-outer"></div>')
-			.append('<div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div>')
 			.appendTo( wrap );
 
 		nav_left = $('<a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a>');
@@ -1091,8 +1111,11 @@
 			close = $('<a id="fancybox-close"></a>'),
 			title = $('<div id="fancybox-title"></div>')
 		);
-
-		outer.append(nav_left, nav_right);
+		if ('ontouchstart' in document.documentElement) {
+			content[0].addEventListener('touchstart', _onTouchStart, false);
+		} else {
+			outer.append(nav_left, nav_right);
+		}
 		close.click($.fancybox.close);
 		loading.click($.fancybox.cancel);
 
@@ -1142,6 +1165,7 @@
 		height : 340,
 		rel : 'rel',
 
+		touchThreshold: 30,
 		autoScale : true,
 		autoDimensions : true,
 		centerOnScroll : false,
