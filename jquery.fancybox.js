@@ -1092,18 +1092,7 @@
 			title = $('<div id="fancybox-title"></div>')
 		);
 
-//		if(Modernizr.touch){		if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-			content.touchwipe({
-			     wipeLeft: function() { $.fancybox.next(); },
-			     wipeRight: function() { $.fancybox.prev() },
-			     min_move_x: 20,
-			     min_move_y: 20,
-			     preventDefaultEvents: true
-			});
-		} else {
-			outer.append(nav_left, nav_right);
-		}
-
+		outer.append(nav_left, nav_right);
 		close.click($.fancybox.close);
 		loading.click($.fancybox.cancel);
 
