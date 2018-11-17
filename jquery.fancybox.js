@@ -1103,7 +1103,7 @@
 		}
 
 		$('body').append(
-			tmp	= $('<div id="fancybox-tmp"></div>'),
+			tmp	= $('<div id="fancybox-tmp" class="fancybox-content"></div>'),
 			loading	= $('<div id="fancybox-loading"><div></div></div>'),
 			overlay	= $('<div id="fancybox-overlay"></div>'),
 			wrap = $('<div id="fancybox-wrap"></div>')
@@ -1116,7 +1116,7 @@
 		nav_right = $('<a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>');
 
 		outer.append(
-			content = $('<div id="fancybox-content"></div>'),
+			content = $('<div id="fancybox-content" class="fancybox-content"></div>'),
 			close = $('<a id="fancybox-close"></a>'),
 			title = $('<div id="fancybox-title"></div>')
 		);
