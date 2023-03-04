@@ -2,8 +2,8 @@
  * FancyBox-M is a modified version of FancyBox 1.3.4
  * Touch events integrated from Bootstrap Carousel Swipe v1.1
  * =====================================================
- * Version: 1.3.42 (16.11.2018)
- * Modified by Radius17 https://github.com/Radius17/Fancybox-M
+ * Version: 1.3.43 (04.03.2023)
+ * Modified by Radius17 https://github.com/Radius17/JavaScript-FancyboxM
  * This modified version is licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  * =====================================================
@@ -334,7 +334,14 @@
 				h = h == 'auto' ? 'auto' : h + 'px';
 			}
 
-			tmp.wrapInner('<div style="width:' + w + ';height:' + h + ';overflow: ' + (selectedOpts.scrolling == 'auto' ? 'auto' : (selectedOpts.scrolling == 'yes' ? 'scroll' : 'hidden')) + ';position:relative;"></div>');
+			var mh = selectedOpts.maxHeight;
+			if (mh.toString().indexOf('%') > -1) {
+				mh = parseInt(($(window).height() - (selectedOpts.margin * 2)) * parseFloat(mh) / 100, 10) + 'px';
+			} else {
+				mh = mh == 'auto' ? 'auto' : mh + 'px';
+			}
+
+			tmp.wrapInner('<div style="' + (mh == 'auto' ? '' : 'max-height:' + mh) + ';width:' + w + ';height:' + h + ';overflow: ' + (selectedOpts.scrolling == 'auto' ? 'auto' : (selectedOpts.scrolling == 'yes' ? 'scroll' : 'hidden')) + ';position:relative;"></div>');
 
 			selectedOpts.width = tmp.width();
 			selectedOpts.height = tmp.height();
@@ -1172,6 +1179,7 @@
 
 		width : 560,
 		height : 340,
+		maxHeight : 'auto',
 		rel : 'rel',
 
 		touchThreshold: 30,
