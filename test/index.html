@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru" class="is-not-mobile h-100">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <title>Fancybox-M TEST PAGE</title>
+    <meta name="description" content="Fancybox-M TEST PAGE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="">
+</head>
+<body>
+<h1 style="display: table;  margin: 50px auto; position: relative;">Fancybox-M TEST PAGE</h1>
+<table style="margin: 0 auto;">
+    <tr>
+        <td colspan="5" style="padding-bottom: 15px; text-align: right;">
+            <a style="cursor:pointer; display: inline-block; padding: 15px; background: blue; color: white;" class="btn btn-primary" onclick="slideshow();">Slide show</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a id="first_image"
+               title="Собаки 1"
+               data-gg-attr="gallery-image-thumb"
+               class="gallery-image-thumb"
+               href="images/image-1.jpg">
+                <img
+                        title="" alt="" class="single-image"
+                        src="images/thumbs/image-1.jpg">
+            </a>
+        </td>
+        <td>
+            <a title="Собаки 2"
+               data-gg-attr="gallery-image-thumb"
+               class="gallery-image-thumb"
+               href="images/image-2.jpg">
+                <img
+                        title="" alt="" class="single-image"
+                        src="images/thumbs/image-2.jpg">
+            </a>
+        </td>
+        <td>
+            <a title="Собаки 3"
+               data-gg-attr="gallery-image-thumb"
+               class="gallery-image-thumb"
+               href="images/image-3.jpg">
+                <img
+                        title="" alt="" class="single-image"
+                        src="images/thumbs/image-3.jpg">
+            </a>
+        </td>
+        <td>
+            <a title="Собаки 4"
+               data-gg-attr="gallery-image-thumb"
+               class="gallery-image-thumb"
+               href="images/image-4.jpg">
+                <img
+                        title="" alt="" class="single-image"
+                        src="images/thumbs/image-4.jpg"></a>
+        </td>
+        <td>
+            <a title="Собаки 5"
+               data-gg-attr="gallery-image-thumb"
+               class="gallery-image-thumb"
+               href="images/image-5.jpg"><img
+                    title="" alt="" class="single-image"
+                    src="images/thumbs/image-5.jpg"></a>
+        </td>
+    </tr>
+</table>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../jquery.fancybox.css">
+<script src="../jquery.fancybox.js"></script>
+<script>
+    var gallery_slideshow=null;
+
+    $(document).ready(function() {
+        $("a.gallery-image-thumb").fancybox({
+            'cyclic'		: true,
+            'rel'			: 'data-gg-attr',
+            'titlePosition' : 'over', // 'float', 'outside', 'inside' or 'over'
+            'titleShow'		: true,
+            'showNavArrows'	: true,
+            'onComplete': function() {
+                //
+            },
+            'onClosed': function() {
+                stopslideshow();
+            }
+        });
+    });
+    function slideshow(){
+        $("#first_image").trigger('click');
+        gallery_slideshow= setTimeout("next_slide()", 2000);
+    }
+    function next_slide(){
+        if ($.fancybox) {
+            $.fancybox.next();
+            gallery_slideshow=setTimeout("next_slide()", 2000);
+        }
+    }
+    function stopslideshow(){
+        clearTimeout(gallery_slideshow);
+    }
+</script>
+</body>
+</html>
