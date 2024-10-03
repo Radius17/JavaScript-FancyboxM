@@ -13,8 +13,7 @@
  * Copyright (c) 2008 - 2010 Janis Skarnelis
  * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely.
  * Their support is greatly appreciated.
- * @FIXME requirements
- * Requires: jQuery v1.3+
+ * Requires: jQuery v1.9+
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
